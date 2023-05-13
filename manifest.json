@@ -1,0 +1,30 @@
+{
+    "name": "Hello World Extension",
+    "version": "1.0",
+    "manifest_version": 3,
+    "description": "Displays 'Hello World' in a popup",
+    "icons": {
+      "128": "caticon.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+
+    "permissions": [
+      "tabs",
+      "activeTab",
+      "contextMenus",
+      "tabs",
+      "storage",
+      "unlimitedStorage",
+      "webRequest"
+    ],
+  "host_permissions": [
+    "localhost:3000"
+  ],
+
+    "externally_connectable": {
+      "matches": ["*://api.openai.com/*"]
+    }
+
+  }
