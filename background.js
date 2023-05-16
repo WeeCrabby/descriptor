@@ -1,9 +1,5 @@
-/*
-//TODO: enable search in chatgpt api
-using the chatgpt api requires a server with the api key
-we will be using node.js and express to create a server - done, testing server is intiated using node server.js, requests are tested using Insomnia
-*/
-//include chrome extension api
+
+//TODO: send request to server, JSON format
 
 chrome.contextMenus.create({
     id: "contextMenuItem",
@@ -24,12 +20,21 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 } );*/
 chrome.contextMenus.onClicked.addListener( ( info, tab ) => {
-    if( info.menuItemId === "contextMenuItem" && info.selectionText != null ) {
-
+    if (info.menuItemId === "contextMenuItem") {
+        fetch('http://localhost:3000/', {
+            method: 'post',
+            body: "THC"
+        }).then(function(r){
+            return r.json();
+        }).then(function(data){
+            console.log(data);
+        });
     }
-} );
 
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+
+});
+/*
+ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     let selectedText = message.text;
 
     // Use the selectedText in the background script
@@ -42,4 +47,6 @@ chrome.tabs.query( { active: true, currentWindow: true }, tabs => {
     console.log( "...." );
 
 } );
+
+ */
 

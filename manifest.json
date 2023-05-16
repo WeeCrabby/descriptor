@@ -20,7 +20,7 @@
       "webRequest"
     ],
   "host_permissions": [
-    "localhost:3000"
+    "localhost:3000/"
   ],
 
     "externally_connectable": {
