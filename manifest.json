@@ -21,10 +21,6 @@
     ],
   "host_permissions": [
     "localhost:3000/"
-  ],
-
-    "externally_connectable": {
-      "matches": ["*://api.openai.com/*"]
-    }
+  ]
 
   }

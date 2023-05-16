@@ -5,6 +5,7 @@ chrome.contextMenus.create({
     id: "contextMenuItem",
     title: "Search for '%s' in ChatGPT",
     contexts: ["selection"],
+    onclick: sendRequest("THC")
 });
 /*
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -19,6 +20,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     //send the data to the server
 
 } );*/
+/*
 chrome.contextMenus.onClicked.addListener( ( info, tab ) => {
     if (info.menuItemId === "contextMenuItem") {
         fetch('http://localhost:3000/', {
@@ -33,6 +35,8 @@ chrome.contextMenus.onClicked.addListener( ( info, tab ) => {
 
 
 });
+*/
+
 /*
  chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     let selectedText = message.text;
@@ -49,4 +53,17 @@ chrome.tabs.query( { active: true, currentWindow: true }, tabs => {
 } );
 
  */
+function sendRequest(selectedText) {
+    fetch('http://localhost:3000/', {
+        method: 'post',
+        body: JSON.stringify({content: selectedText}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(function(r){
+        return r.json();
+    }).then(function(data){
+        console.log(data);
+    });
+}
 
