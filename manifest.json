@@ -9,7 +9,13 @@
     "background": {
         "service_worker": "background.js"
     },
+    "content_scripts": [{
 
+      "matches": ["https://www.google.com/*"],
+      "css": ["content.css"],
+      "js": ["content.js"]
+
+      }],
     "permissions": [
       "tabs",
       "activeTab",

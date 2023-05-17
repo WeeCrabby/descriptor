@@ -1,15 +1,25 @@
-/*
-let selectedText;
-document.addEventListener('mouseup', function(event) {
-    selectedText = window.getSelection().toString();
-    chrome.runtime.sendMessage({text: selectedText}).then(r => console.log(r));
+// Add bubble to the top of the page.
+const bubbleDOM = document.createElement('div');
+bubbleDOM.setAttribute('class', 'selection_bubble');
+document.body.appendChild(bubbleDOM);
+// Lets listen to mouseup DOM events.
+document.addEventListener('mouseup', function (e) {
+let selection = window.getSelection().toString();
+if (selection.length > 0) {
+    renderBubble(e.clientX, e.clientY, selection);
+}
+}, false);
 
-});
-*/
-//send selected text to background.js when context menu item is clicked
-chrome.contextMenus.onClicked.addListener( ( info, tab ) => {
-    if( info.menuItemId === "contextMenuItem" && info.selectionText != null ) {
-        chrome.runtime.sendMessage({text: info.selectionText}).then(r => console.log(r));
-    }
-});
 
+// Close the bubble when we click on the screen.
+document.addEventListener('mousedown', function (e) {
+    bubbleDOM.style.visibility = 'hidden';
+}, false);
+
+// Move that bubble to the appropriate location.
+function renderBubble(mouseX, mouseY, selection) {
+    bubbleDOM.innerHTML = selection;
+    bubbleDOM.style.top = mouseY + 'px';
+    bubbleDOM.style.left = mouseX + 'px';
+    bubbleDOM.style.visibility = 'visible';
+}
